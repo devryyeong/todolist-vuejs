@@ -1,24 +1,32 @@
-# my-todo
+# Google Forms
 
-## Project setup
+## ✨ 구현 사항
+
+-
+-
+-
+
+## 🔨 기술 스택
+
+<img src="https://img.shields.io/badge/React Native-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+<img src="https://img.shields.io/badge/Expo-4A4F52?style=for-the-badge&logo=Expo&logoColor=white">
+<img src="https://img.shields.io/badge/RTK-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<img src="https://img.shields.io/badge/Redux persist-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+
+<br>
+
+## 🔧 설치 및 실행
+
+### 설치
+
 ```
-yarn install
+$ yarn
 ```
 
-### Compiles and hot-reloads for development
+### 실행
+
 ```
-yarn serve
+$ yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 🎬 데모 영상

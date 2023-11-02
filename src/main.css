@@ -1,0 +1,23 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+}
+
+input[type="text"] {
+	border: none;
+	border-bottom: 2px solid;
+	outline: none;
+	background: none;
+	margin-bottom: 20px;
+}
+
+.todo-item .todo-content input {
+	margin-left: 8px;
+}
+
+.todo-item.done .todo-content input {
+	text-decoration: line-through;
+	color: red;
+}
