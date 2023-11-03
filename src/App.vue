@@ -1,11 +1,8 @@
 <template>
   <section class="greeting">
     <div class="container">
-      <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-      <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
       <h2 class="title">
-        Hello, <input type="text" placeholder="name" v-model="name" />
-        <!-- Hello, -->
+        Hello, <input type="text" placeholder="name" v-model="name" id="name" />
       </h2>
     </div>
   </section>
@@ -17,32 +14,20 @@
       <input type="text" placeholder="write" v-model="inputContent" />
       <!-- <input type="submit" value="Add Todo"> -->
       <button type="submit">Add</button>
-
-      <!-- {{ inputContent }} -->
     </form>
   </section>
-
-  <section class="todo-list">
-    <h3> TODO LIST</h3>
-    <div class="list">
-      <div v-for="todo in todos" :class="`todo-item ${todo.done}`">
-        <label>
-          <input type="checkbox" v-model="todo.done">
-        </label>
-
-        <span class="todo-content">
-          <input type="text" v-model="todo.content">
-        </span>
-        <span>
-          <button class="delete" @click="removeTodo(todo)">Delete</button>
-        </span>
-      </div>
-    </div>
-  </section>
+  <TodoList :todos="todos" />
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, computed, watch } from "vue";
+import TodoList from "./components/TodoList.vue";
+
+const props = defineProps<{
+  content: string
+  done: boolean
+  createdAt?: Date
+}>()
 
 const todos = ref([]);
 const name = ref("");
@@ -54,7 +39,7 @@ onMounted(() => {
 });
 
 const addTodo = () => {
-  if(inputContent.value.trim() === '') {
+  if(inputContent.value.trim() === "") {
     return;
   }
   
