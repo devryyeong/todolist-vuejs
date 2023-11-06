@@ -1,10 +1,8 @@
 <template>
   <section class="greeting">
-    <div class="container">
-      <h2 class="title">
-        Hello, <input type="text" placeholder="name" v-model="name" id="name" />
-      </h2>
-    </div>
+    <h2 class="title">
+      Hello, <input type="text" placeholder="name" v-model="name" id="name" />
+    </h2>
   </section>
 
   <section class="create-todo">
@@ -12,68 +10,62 @@
 
     <form @submit.prevent="addTodo">
       <input type="text" placeholder="write" v-model="inputContent" />
-      <!-- <input type="submit" value="Add Todo"> -->
-      <button type="submit">Add</button>
+      <button type="submit">ADD</button>
     </form>
   </section>
-  <TodoList :todos="todos" />
+
+  <TodoList :todos="todos" @removeTodo="removeTodo" />
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, computed, watch } from "vue";
 import TodoList from "./components/TodoList.vue";
+import TodoItem from "./type";
 
-const props = defineProps<{
-  content: string
-  done: boolean
-  createdAt?: Date
-}>()
-
-const todos = ref([]);
-const name = ref("");
-const inputContent = ref("");
+const todos = ref<TodoItem[]>([]);
+const name = ref<string>("");
+const inputContent = ref<string>("");
 
 onMounted(() => {
   name.value = localStorage.getItem("name") || "";
-  todos.value = JSON.parse(localStorage.getItem('todos')) || [];
+  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
 });
 
 const addTodo = () => {
-  if(inputContent.value.trim() === "") {
+  if (inputContent.value.trim() === "") {
     return;
   }
-  
+
   todos.value.push({
     content: inputContent.value,
     done: false,
-    createdAt: new Date().getTime()
-  })
-  
+  });
+
   inputContent.value = "";
 };
 
-const removeTodo = (todo) => {
-  todos.value = todos.value.filter(t => t !== todo);
+const removeTodo = (todo: TodoItem) => {
+  todos.value = todos.value.filter((t) => t !== todo);
 };
 
-watch(todos, (newVal) => {
-  localStorage.setItem('todos', JSON.stringify(newVal))
-}, { deep: true });
+watch(
+  todos,
+  (newVal) => {
+    localStorage.setItem("todos", JSON.stringify(newVal));
+  },
+  { deep: true }
+);
 
 watch(name, (newVal) => {
   localStorage.setItem("name", newVal);
 });
-
 </script>
 
 <style class="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 40px;
   text-align: center;
   color: #2c3e50;
-  margin: 30px;
   background-color: lightgray;
 }
 </style>
