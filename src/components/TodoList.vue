@@ -20,7 +20,7 @@
           <input type="text" :value="todo.content" @input="contentHandler(todo, $event)" />
         </span>
         <span>
-          <button class="delete" @click="$emit('removeTodo', todo)">
+          <button class="button delete" @click="$emit('removeTodo', todo)">
             DELETE
           </button>
         </span>
@@ -33,18 +33,32 @@
 import { toRefs, defineProps, defineEmits, Ref } from "vue";
 import TodoItem from "../type";
 
-const props: { todos: Ref<TodoItem>; removeTodo: Function } = defineProps([
-  "todos",
-  "removeTodo",
+const props: { todos: TodoItem[] } = defineProps([
+  "todos"
 ]);
+
 const emit = defineEmits(["removeTodo"]);
 
-const checkboxHandler = (todo: TodoItem, event: Event) => {
-  todo.done = !todo.done;
+const checkboxHandler = (todo: TodoItem, event: InputEvent) => {
+  const updatedTodo = { ...todo };
+  updatedTodo.done = !updatedTodo.done;
+  
+  // index 업데이트
+  const index = props.todos.indexOf(todo);
+  if (index !== -1) {
+    props.todos[index] = updatedTodo;
+  }
 };
 
-const contentHandler = (todo: TodoItem, event: Event) => {
-  todo.content = event.target.value;
+const contentHandler = (todo: TodoItem, event: InputEvent) => {
+  const updatedTodo = { ...todo };
+  updatedTodo.content = event.target.value;
+
+  // index 업데이트
+  const index = props.todos.indexOf(todo);
+  if (index !== -1) {
+    props.todos[index] = updatedTodo;
+  }
 };
 </script>
 

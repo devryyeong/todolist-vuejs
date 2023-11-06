@@ -7,12 +7,12 @@
 
   <section class="create-todo">
     <h3>Create a todo.</h3>
-
     <form @submit.prevent="addTodo">
       <input type="text" placeholder="write" v-model="inputContent" />
-      <button type="submit">ADD</button>
+      <button type="submit" class="button">ADD</button>
     </form>
   </section>
+  <!-- <TodoInput :inputContent="inputContent" @addTodo="addTodo" /> -->
 
   <TodoList :todos="todos" @removeTodo="removeTodo" />
 </template>
@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, computed, watch } from "vue";
 import TodoList from "./components/TodoList.vue";
+import TodoInput from "./components/TodoInput.vue";
 import TodoItem from "./type";
 
 const todos = ref<TodoItem[]>([]);
