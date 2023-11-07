@@ -9,8 +9,8 @@
     <h3>Create a todo.</h3>
 
     <form @submit.prevent="addTodo">
-      <input type="text" placeholder="write" v-model="inputContent" />
-      <button type="submit">ADD</button>
+      <input type="text" placeholder="write task." v-model="inputContent" />
+      <button type="submit" class="button">ADD</button>
     </form>
   </section>
 
@@ -37,6 +37,7 @@ const addTodo = () => {
   }
 
   todos.value.push({
+    id: new Date().getTime(),
     content: inputContent.value,
     done: false,
   });
@@ -48,11 +49,8 @@ const removeTodo = (todo: TodoItem) => {
   todos.value = todos.value.filter((t) => t !== todo);
 };
 
-// TODO
 const updateTodo = (todo: TodoItem) => {
-  // console.log("todo: ", todos.value)
-  // const index = todos.value.indexOf(todo);
-  const index = todos.value.findIndex((t) => t.content === todo.content);
+  const index = todos.value.findIndex((t) => t.id === todo.id);
   console.log(index);
   if (index !== -1) {
     const todos_ = JSON.parse(JSON.stringify([...todos.value])) as Array<TodoItem>;
@@ -60,9 +58,7 @@ const updateTodo = (todo: TodoItem) => {
     todos.value = todos_;
     
   }
-  // console.log("a: ", todos.value)
 };
-
 
 watch(
   todos,

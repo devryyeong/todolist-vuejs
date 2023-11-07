@@ -53,15 +53,13 @@ const emit = defineEmits<{
 
 const checkboxHandler = (todo: TodoItem, event: Event) => {
   const updatedTodo = { ...todo };
-  updatedTodo.done = !updatedTodo.done;
+  updatedTodo.done = event.target?.checked;
   emit("updateTodo", updatedTodo);
-  console.log("updatedTodo.done: ",updatedTodo.done);
 };
 
-const contentHandler = (todo: TodoItem, event: any) => {
+const contentHandler = (todo: TodoItem, event: Event) => {
   const updatedTodo = { ...todo };
-  updatedTodo.content = event.target.value;
-  // console.log("event.target.value: ", updatedTodo)
+  updatedTodo.content = event.target?.value;
   emit("updateTodo", updatedTodo);
 
 };
