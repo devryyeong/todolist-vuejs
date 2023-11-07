@@ -38,10 +38,7 @@ import TodoItem from "@/type";
 
 const props = defineProps({
   todos: {
-    // type: Object as PropType<TodoItem>,
     type: Array as PropType<Array<TodoItem>>,
-    // type: String as PropType<'ITEM'|'LIST'>,
-    // type: Array<TodoItem>,
     required: true,
   },
 });
