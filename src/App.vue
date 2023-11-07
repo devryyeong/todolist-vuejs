@@ -26,6 +26,7 @@ const todos = ref<TodoItem[]>([]);
 const name = ref<string>("");
 const inputContent = ref<string>("");
 
+
 onMounted(() => {
   name.value = localStorage.getItem("name") || "";
   todos.value = JSON.parse(localStorage.getItem("todos")) || [];
@@ -51,12 +52,12 @@ const removeTodo = (todo: TodoItem) => {
 
 const updateTodo = (todo: TodoItem) => {
   const index = todos.value.findIndex((t) => t.id === todo.id);
-  console.log(index);
   if (index !== -1) {
-    const todos_ = JSON.parse(JSON.stringify([...todos.value])) as Array<TodoItem>;
+    const todos_ = JSON.parse(
+      JSON.stringify([...todos.value])
+    ) as Array<TodoItem>;
     todos_.splice(index, 1, todo);
     todos.value = todos_;
-    
   }
 };
 
@@ -64,8 +65,7 @@ watch(
   todos,
   (newVal) => {
     localStorage.setItem("todos", JSON.stringify(newVal));
-  },
-  { deep: true }
+  }, { }
 );
 
 watch(name, (newVal) => {
