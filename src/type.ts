@@ -1,4 +1,6 @@
-export default interface TodoItem {
+type TodoItem = {
   content: string,
   done: boolean,
 }
+
+export default TodoItem;

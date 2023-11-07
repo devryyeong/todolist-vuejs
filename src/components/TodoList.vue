@@ -8,16 +8,19 @@
         :key="todo.content"
       >
         <label>
-          <!-- <input type="checkbox" v-model="todo.done" /> -->
           <input
             type="checkbox"
             :value="todo.done"
-            @input="checkboxHandler(todo, $event)"
+            @change="checkboxHandler(todo, $event)"
           />
         </label>
 
         <span class="todo-content">
-          <input type="text" :value="todo.content" @input="contentHandler(todo, $event)" />
+          <input
+            type="text"
+            :value="todo.content"
+            @input="contentHandler(todo, $event)"
+          />
         </span>
         <span>
           <button class="button delete" @click="$emit('removeTodo', todo)">
@@ -30,36 +33,39 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs, defineProps, defineEmits, Ref } from "vue";
-import TodoItem from "../type";
+import { defineProps, defineEmits, PropType } from "vue";
+import TodoItem from "@/type";
 
-const props: { todos: TodoItem[] } = defineProps([
-  "todos"
-]);
+const props = defineProps({
+  todos: {
+    // type: Object as PropType<TodoItem>,
+    type: Array as PropType<Array<TodoItem>>,
+    // type: String as PropType<'ITEM'|'LIST'>,
+    // type: Array<TodoItem>,
+    required: true,
+  },
+});
 
-const emit = defineEmits(["removeTodo"]);
+const emit = defineEmits<{
+  removeTodo: [TodoItem];
+  updateTodo: [TodoItem];
+}>();
 
-const checkboxHandler = (todo: TodoItem, event: InputEvent) => {
+const checkboxHandler = (todo: TodoItem, event: Event) => {
   const updatedTodo = { ...todo };
   updatedTodo.done = !updatedTodo.done;
-  
-  // index 업데이트
-  const index = props.todos.indexOf(todo);
-  if (index !== -1) {
-    props.todos[index] = updatedTodo;
-  }
+  emit("updateTodo", updatedTodo);
+  console.log("updatedTodo.done: ",updatedTodo.done);
 };
 
-const contentHandler = (todo: TodoItem, event: InputEvent) => {
+const contentHandler = (todo: TodoItem, event: any) => {
   const updatedTodo = { ...todo };
   updatedTodo.content = event.target.value;
+  // console.log("event.target.value: ", updatedTodo)
+  emit("updateTodo", updatedTodo);
 
-  // index 업데이트
-  const index = props.todos.indexOf(todo);
-  if (index !== -1) {
-    props.todos[index] = updatedTodo;
-  }
 };
+
 </script>
 
 <style></style>

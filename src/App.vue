@@ -7,20 +7,19 @@
 
   <section class="create-todo">
     <h3>Create a todo.</h3>
+
     <form @submit.prevent="addTodo">
       <input type="text" placeholder="write" v-model="inputContent" />
-      <button type="submit" class="button">ADD</button>
+      <button type="submit">ADD</button>
     </form>
   </section>
-  <!-- <TodoInput :inputContent="inputContent" @addTodo="addTodo" /> -->
 
-  <TodoList :todos="todos" @removeTodo="removeTodo" />
+  <TodoList :todos="todos" @removeTodo="removeTodo" @updateTodo="updateTodo" />
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, computed, watch } from "vue";
 import TodoList from "./components/TodoList.vue";
-import TodoInput from "./components/TodoInput.vue";
 import TodoItem from "./type";
 
 const todos = ref<TodoItem[]>([]);
@@ -48,6 +47,22 @@ const addTodo = () => {
 const removeTodo = (todo: TodoItem) => {
   todos.value = todos.value.filter((t) => t !== todo);
 };
+
+// TODO
+const updateTodo = (todo: TodoItem) => {
+  // console.log("todo: ", todos.value)
+  // const index = todos.value.indexOf(todo);
+  const index = todos.value.findIndex((t) => t.content === todo.content);
+  console.log(index);
+  if (index !== -1) {
+    const todos_ = JSON.parse(JSON.stringify([...todos.value])) as Array<TodoItem>;
+    todos_.splice(index, 1, todo);
+    todos.value = todos_;
+    
+  }
+  // console.log("a: ", todos.value)
+};
+
 
 watch(
   todos,
