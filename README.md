@@ -1,17 +1,16 @@
-# Google Forms
+# Todo App
 
 ## ✨ 구현 사항
 
--
--
--
+- 투두 추가 / 수정 / 삭제
+- 완료여부 체크
+- 로컬 스토리지 저장
 
 ## 🔨 기술 스택
 
-<img src="https://img.shields.io/badge/React Native-61DAFB?style=for-the-badge&logo=React&logoColor=white">
-<img src="https://img.shields.io/badge/Expo-4A4F52?style=for-the-badge&logo=Expo&logoColor=white">
-<img src="https://img.shields.io/badge/RTK-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
-<img src="https://img.shields.io/badge/Redux persist-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white">
+<img src="https://img.shields.io/badge/Vue-4FC08D?style=for-the-badge&logo=Vue.js&logoColor=white">
+
 
 <br>
 
@@ -28,5 +27,3 @@ $ yarn
 ```
 $ yarn serve
 ```
-
-## 🎬 데모 영상
